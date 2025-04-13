@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeForCash | Desarrollador & Hacker Ético</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00f7ff;
+            --secondary: #ff00e4;
+            --dark: #0a0a20;
+            --light: #e0e0ff;
+            --kali: #557C94;
+            --hacker: #00FF41;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        #space {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 247, 255, 0.3);
+            margin-bottom: 3rem;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 5rem 0;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+        
+        .typewriter {
+            display: inline-block;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: blink-caret 0.75s step-end infinite;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--dark);
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 247, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            margin: 0.5rem;
+        }
+        
+        .cta-button.kali {
+            background: linear-gradient(45deg, var(--kali), var(--hacker));
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.5);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 247, 255, 0.8);
+        }
+        
+        .cta-button.kali:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .planet-system {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            margin: 5rem auto;
+        }
+        
+        .central-planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #3a0ca3, #7209b7, #f72585);
+            border-radius: 50%;
+            box-shadow: 0 0 50px rgba(247, 37, 133, 0.6);
+            animation: rotate 20s linear infinite;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .central-planet span {
+            position: relative;
+            z-index: 3;
+            color: white;
+            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .central-planet:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 80px rgba(247, 37, 133, 0.9);
+        }
+        
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px dashed rgba(0, 247, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        .project-planet {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #4cc9f0, #4895ef);
+            box-shadow: 0 0 20px rgba(76, 201, 240, 0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        
+        .project-planet:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 30px rgba(76, 201, 240, 0.9);
+        }
+        
+        .project-detail {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 80%;
+            max-width: 800px;
+            background: rgba(10, 10, 32, 0.95);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 0 50px rgba(0, 247, 255, 0.3);
+            z-index: 100;
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(10px);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .project-detail.active {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+        
+        .close-detail {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-detail:hover {
+            transform: rotate(90deg);
+            color: var(--secondary);
+        }
+        
+        .skills-section {
+            margin: 5rem 0;
+            text-align: center;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-card {
+            background: rgba(0, 247, 255, 0.1);
+            border: 1px solid rgba(0, 247, 255, 0.3);
+            border-radius: 10px;
+            padding: 1.5rem;
+            width: 150px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(0, 247, 255, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 247, 255, 0.1);
+        }
+        
+        .skill-card.kali {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        
+        .skill-card.kali:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 255, 65, 0.1);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .skill-icon.kali {
+            background: linear-gradient(45deg, var(--kali), var(--hacker));
+        }
+        
+        .kali-section {
+            background: rgba(5, 5, 15, 0.7);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 5rem 0;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .kali-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.kali.org/images/kali-logo.svg') no-repeat;
+            background-size: 30%;
+            background-position: right bottom;
+            opacity: 0.05;
+            z-index: -1;
+        }
+        
+        .kali-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(45deg, var(--kali), var(--hacker));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .matrix-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+        
+        .contact-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem 0;
+            background: rgba(0, 247, 255, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 247, 255, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(0, 247, 255, 0.1);
+            color: var(--primary);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: rgba(0, 247, 255, 0.2);
+            transform: translateY(-5px);
+            color: var(--secondary);
+            box-shadow: 0 5px 15px rgba(0, 247, 255, 0.3);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(0, 247, 255, 0.3);
+            margin-top: 3rem;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        @keyframes rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary); }
+        }
+        
+        /* Efectos de partículas */
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* Terminal estilo hacker */
+        .terminal {
+            background: rgba(0, 10, 0, 0.8);
+            border: 1px solid var(--hacker);
+            border-radius: 5px;
+            padding: 1rem;
+            font-family: 'Space Mono', monospace;
+            color: var(--hacker);
+            margin: 2rem 0;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                rgba(0, 255, 65, 0.1) 0.1em,
+                transparent 0.1em
+            );
+            background-size: 100% 1.2em;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: rgba(0, 255, 65, 0.7);
+        }
+        
+        .terminal-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .prompt {
+            color: var(--hacker);
+        }
+        
+        .command {
+            color: white;
+        }
+        
+        .output {
+            color: rgba(0, 255, 65, 0.7);
+            margin: 0.5rem 0;
+        }
+        
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1 }
+            50% { opacity: 0 }
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .planet-system {
+                height: 500px;
+            }
+            
+            .orbit:nth-child(4) {
+                display: none;
+            }
+            
+            .project-planet:nth-child(n+7) {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+            }
+            
+            nav {
+                width: 100%;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            
+            nav.active {
+                max-height: 300px;
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem 0;
+            }
+            
+            .hero {
+                padding: 3rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .planet-system {
+                height: 400px;
+                margin: 3rem auto;
+            }
+            
+            .central-planet {
+                width: 150px;
+                height: 150px;
+                font-size: 0.9rem;
+            }
+            
+            .project-planet {
+                width: 60px;
+                height: 60px;
+                font-size: 0.6rem;
+            }
+            
+            .orbit {
+                width: 250px !important;
+                height: 250px !important;
+            }
+            
+            .orbit:nth-child(3) {
+                display: none;
+            }
+            
+            .project-detail {
+                width: 90%;
+                padding: 1.5rem;
+            }
+            
+            .kali-section {
+                padding: 2rem 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .planet-system {
+                height: 300px;
+            }
+            
+            .central-planet {
+                width: 120px;
+                height: 120px;
+                font-size: 0.8rem;
+            }
+            
+            .project-planet {
+                width: 50px;
+                height: 50px;
+                font-size: 0.5rem;
+            }
+            
+            .orbit {
+                width: 200px !important;
+                height: 200px !important;
+            }
+            
+            .skill-card {
+                width: 120px;
+                padding: 1rem;
+            }
+            
+            .social-links {
+                gap: 1rem;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="space"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">CodeForCash</div>
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#projects">Proyectos</a></li>
+                    <li><a href="#skills">Habilidades</a></li>
+                    <li><a href="#kali">Seguridad</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section class="hero" id="home">
+            <h1><span id="typewriter"></span></h1>
+            <p>Innovador, creador y solucionador de problemas. Transformo café en código y ideas en realidades digitales. Especializado en desarrollo full-stack y seguridad ofensiva.</p>
+            <div>
+                <a href="#projects" class="cta-button">Explora Mis Proyectos</a>
+                <a href="#kali" class="cta-button kali">Descubre Mi Lado Hacker</a>
+            </div>
+        </section>
+        
+        <section class="planet-system" id="projects">
+            <div class="central-planet" id="central-planet">
+                <span>CodeForCash</span>
+                <span style="font-size: 0.7rem; margin-top: 0.5rem;">Haz clic en los planetas</span>
+            </div>
+            
+            <div class="orbit" style="width: 300px; height: 300px;"></div>
+            <div class="orbit" style="width: 500px; height: 500px;"></div>
+            <div class="orbit" style="width: 700px; height: 700px;"></div>
+            
+            <!-- Proyectos orbitando -->
+            <div class="project-planet" style="top: 50%; left: calc(50% - 150px);" data-project="1">E-commerce React</div>
+            <div class="project-planet" style="top: calc(50% - 150px); left: 50%;" data-project="2">App de Tareas</div>
+            <div class="project-planet" style="top: 50%; left: calc(50% + 150px);" data-project="3">Juego JS</div>
+            <div class="project-planet" style="top: calc(50% + 150px); left: 50%;" data-project="4">API REST</div>
+            <div class="project-planet" style="top: calc(50% - 250px); left: calc(50% - 250px);" data-project="5">Red Social</div>
+            <div class="project-planet" style="top: calc(50% - 250px); left: calc(50% + 250px);" data-project="6">Blog CMS</div>
+            <div class="project-planet" style="top: calc(50% + 250px); left: calc(50% - 250px);" data-project="7">Dashboard</div>
+            <div class="project-planet" style="top: calc(50% + 250px); left: calc(50% + 250px);" data-project="8">Portafolio</div>
+        </section>
+        
+        <!-- Detalles de proyectos -->
+        <div class="project-detail" id="project-detail-1">
+            <button class="close-detail">&times;</button>
+            <h2>E-commerce con React</h2>
+            <p>Tienda online completa con carrito de compras, autenticación de usuarios y pasarela de pagos integrada.</p>
+            <p><strong>Tecnologías:</strong> React, Node.js, MongoDB, Stripe API</p>
+            <p><strong>Características:</strong></p>
+            <ul>
+                <li>Búsqueda en tiempo real</li>
+                <li>Reviews de productos</li>
+                <li>Sistema de recomendaciones</li>
+                <li>Panel de administración</li>
+            </ul>
+            <a href="#" class="cta-button">Ver Demo</a>
+            <a href="#" class="cta-button kali">Ver Código</a>
+        </div>
+        
+        <div class="project-detail" id="project-detail-2">
+            <button class="close-detail">&times;</button>
+            <h2>Aplicación de Tareas Avanzada</h2>
+            <p>Gestor de tareas con arrastrar y soltar, categorías, recordatorios y sincronización en la nube.</p>
+            <p><strong>Tecnologías:</strong> Vue.js, Firebase, Drag & Drop API</p>
+            <a href="#" class="cta-button">Ver Demo</a>
+        </div>
+        
+        <div class="project-detail" id="project-detail-3">
+            <button class="close-detail">&times;</button>
+            <h2>Juego de Naves Espaciales</h2>
+            <p>Juego arcade desarrollado completamente con JavaScript vanilla y Canvas.</p>
+            <p><strong>Tecnologías:</strong> JavaScript, Canvas, Web Audio API</p>
+            <a href="#" class="cta-button">Jugar Ahora</a>
+        </div>
+        
+        <!-- Más detalles de proyectos... -->
+        
+        <section class="skills-section" id="skills">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Mis <span style="background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent;">Habilidades</span></h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem;">Domino diversas tecnologías que me permiten crear soluciones completas y robustas.</p>
+            
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-html5"></i></div>
+                    <h3>HTML5</h3>
+                    <div class="skill-bar">
+                        <div style="width: 95%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-css3-alt"></i></div>
+                    <h3>CSS3</h3>
+                    <div class="skill-bar">
+                        <div style="width: 90%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-js"></i></div>
+                    <h3>JavaScript</h3>
+                    <div class="skill-bar">
+                        <div style="width: 85%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-react"></i></div>
+                    <h3>React</h3>
+                    <div class="skill-bar">
+                        <div style="width: 80%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fab fa-node-js"></i></div>
+                    <h3>Node.js</h3>
+                    <div class="skill-bar">
+                        <div style="width: 75%; height: 5px; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="kali-section" id="kali">
+            <canvas id="matrix-canvas" class="matrix-effect"></canvas>
+            <h2>Seguridad Ofensiva & Kali Linux</h2>
+            <p>Además de desarrollo, tengo experiencia en seguridad informática y pruebas de penetración. Utilizo Kali Linux para identificar vulnerabilidades y fortalecer sistemas.</p>
+            
+            <div class="terminal">
+                <div class="terminal-header">
+                    <span>root@kali:~</span>
+                    <span>bash</span>
+                </div>
+                <div class="terminal-content">
+                    <div><span class="prompt">$</span> <span class="command">whoami</span></div>
+                    <div class="output">codeforcash - Ethical Hacker & Developer</div>
+                    
+                    <div><span class="prompt">$</span> <span class="command">skills --security</span></div>
+                    <div class="output">
+                        - Penetration Testing<br>
+                        - Vulnerability Assessment<br>
+                        - Network Security<br>
+                        - Web App Security<br>
+                        - Forensic Analysis
+                    </div>
+                    
+                    <div><span class="prompt">$</span> <span class="command">tools --favorites</span></div>
+                    <div class="output">
+                        - Metasploit Framework<br>
+                        - Burp Suite<br>
+                        - Nmap<br>
+                        - Wireshark<br>
+                        - John the Ripper
+                    </div>
+                    
+                    <div><span class="prompt">$</span> <span class="command blinking-cursor">_</span></div>
+                </div>
+            </div>
+            
+            <div class="skills-container">
+                <div class="skill-card kali">
+                    <div class="skill-icon kali"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Pentesting</h3>
+                    <div class="skill-bar">
+                        <div style="width: 80%; height: 5px; background: linear-gradient(90deg, var(--kali), var(--hacker)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card kali">
+                    <div class="skill-icon kali"><i class="fas fa-network-wired"></i></div>
+                    <h3>Seguridad Redes</h3>
+                    <div class="skill-bar">
+                        <div style="width: 75%; height: 5px; background: linear-gradient(90deg, var(--kali), var(--hacker)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card kali">
+                    <div class="skill-icon kali"><i class="fas fa-lock"></i></div>
+                    <h3>Criptografía</h3>
+                    <div class="skill-bar">
+                        <div style="width: 70%; height: 5px; background: linear-gradient(90deg, var(--kali), var(--hacker)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                
+                <div class="skill-card kali">
+                    <div class="skill-icon kali"><i class="fas fa-bug"></i></div>
+                    <h3>Análisis Vulnerabilidades</h3>
+                    <div class="skill-bar">
+                        <div style="width: 85%; height: 5px; background: linear-gradient(90deg, var(--kali), var(--hacker)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="#contact" class="cta-button kali">¿Necesitas Seguridad para tu Proyecto?</a>
+        </section>
+        
+        <section class="contact-section" id="contact">
+            <h2 style="font-size: 2.5rem; margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">¿Listo para <span style="background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent;">Colaborar</span>?</h2>
+            <p style="max-width: 700px; margin: 0 auto 2rem;">Si tienes un proyecto en mente o quieres saber más sobre mi trabajo, no dudes en contactarme.</p>
+            <a href="mailto:ccodefor@gmail.com" class="cta-button">Envíame un Email</a>
+            
+            <div class="social-links">
+                <a href="https://github.com/codeforcash" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/codeforcash" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/codeforcash" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="https://instagram.com/code.forcash" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.hackerrank.com/codeforcash" class="social-link"><i class="fab fa-hackerrank"></i></a>
+            </div>
+        </section>
+        
+        <footer>
+            <p>© 2023 CodeForCash - Todos los derechos reservados</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: rgba(255, 255, 255, 0.6);">Hecho con ♥ y código en el universo digital</p>
+        </footer>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        // Configuración del espacio con Three.js
+        document.addEventListener('DOMContentLoaded', function() {
+            // Menú móvil
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.innerHTML = mainNav.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Cerrar menú al hacer clic en un enlace
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                        menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            });
+            
+            // Crear escena de espacio 3D
+            const spaceContainer = document.getElementById('space');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            spaceContainer.appendChild(renderer.domElement);
+            
+            // Crear estrellas
+            const starsGeometry = new THREE.BufferGeometry();
+            const starsMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 0.05,
+                transparent: true
+            });
+            
+            const starsVertices = [];
+            for (let i = 0; i < 5000; i++) {
+                const x = (Math.random() - 0.5) * 2000;
+                const y = (Math.random() - 0.5) * 2000;
+                const z = (Math.random() - 0.5) * 2000;
+                starsVertices.push(x, y, z);
+            }
+            
+            starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
+            const stars = new THREE.Points(starsGeometry, starsMaterial);
+            scene.add(stars);
+            
+            // Posicionar cámara
+            camera.position.z = 500;
+            
+            // Animación
+            function animate() {
+                requestAnimationFrame(animate);
+                stars.rotation.x += 0.0001;
+                stars.rotation.y += 0.0001;
+                renderer.render(scene, camera);
+            }
+            animate();
+            
+            // Partículas interactivas
+            particlesJS('space', {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#00f7ff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": false,
+                        "anim": {
+                            "enable": false,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                        "anim": {
+                            "enable": false,
+                            "speed": 40,
+                            "size_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#00f7ff",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 140,
+                            "line_linked": {
+                                "opacity": 1
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+            
+            // Sistema planetario interactivo
+            const projectPlanets = document.querySelectorAll('.project-planet');
+            const projectDetails = document.querySelectorAll('.project-detail');
+            const closeButtons = document.querySelectorAll('.close-detail');
+            
+            projectPlanets.forEach(planet => {
+                planet.addEventListener('click', function() {
+                    const projectId = this.getAttribute('data-project');
+                    const detail = document.getElementById(`project-detail-${projectId}`);
+                    
+                    detail.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.parentElement.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+            
+            // Efecto de partículas al hacer hover en botones
+            const ctaButtons = document.querySelectorAll('.cta-button');
+            
+            ctaButtons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    createButtonParticles(this);
+                });
+            });
+            
+            function createButtonParticles(button) {
+                const rect = button.getBoundingClientRect();
+                const particles = [];
+                const particleCount = 15;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 5 + 2;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    const x = Math.random() * rect.width;
+                    const y = Math.random() * rect.height;
+                    
+                    particle.style.left = `${x}px`;
+                    particle.style.top = `${y}px`;
+                    
+                    button.appendChild(particle);
+                    particles.push(particle);
+                    
+                    // Animación
+                    const animation = particle.animate([
+                        { transform: 'translate(0, 0)', opacity: 1 },
+                        { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, opacity: 0 }
+                    ], {
+                        duration: Math.random() * 1000 + 500,
+                        easing: 'cubic-bezier(0, 0.9, 0.3, 1)'
+                    });
+                    
+                    animation.onfinish = () => {
+                        particle.remove();
+                    };
+                }
+            }
+            
+            // Efecto de escritura en el título
+            const heroTitle = document.getElementById('typewriter');
+            const texts = [
+                "Transformo Ideas en Realidad Digital",
+                "Desarrollador Full-Stack",
+                "Hacker Ético",
+                "Innovador Tecnológico",
+                "Creador de Soluciones"
+            ];
+            let currentTextIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let isEnd = false;
+            
+            function typeWriterEffect() {
+                const currentText = texts[currentTextIndex];
+                
+                if (isDeleting) {
+                    heroTitle.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    heroTitle.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                
+                if (!isDeleting && charIndex === currentText.length) {
+                    isEnd = true;
+                    setTimeout(typeWriterEffect, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    currentTextIndex = (currentTextIndex + 1) % texts.length;
+                    setTimeout(typeWriterEffect, 500);
+                } else {
+                    const typingSpeed = isDeleting ? 50 : 100;
+                    setTimeout(typeWriterEffect, typingSpeed);
+                }
+                
+                if (isEnd) {
+                    isDeleting = true;
+                    isEnd = false;
+                }
+            }
+            
+            setTimeout(typeWriterEffect, 1000);
+            
+            // Efecto de scroll parallax
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.pageYOffset;
+                const space = document.getElementById('space');
+                space.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+                
+                // Animación de elementos al hacer scroll
+                const elements = document.querySelectorAll('.skill-card, .hero p, .hero h1');
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.3;
+                    
+                    if (elementPosition < screenPosition) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Inicializar animaciones
+            const animatedElements = document.querySelectorAll('.skill-card, .hero p');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            });
+            
+            // Efecto Matrix
+            const matrixCanvas = document.getElementById('matrix-canvas');
+            if (matrixCanvas) {
+                const ctx = matrixCanvas.getContext('2d');
+                matrixCanvas.width = matrixCanvas.offsetWidth;
+                matrixCanvas.height = matrixCanvas.offsetHeight;
+                
+                const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+                const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                const nums = '0123456789';
+                const symbols = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~';
+                
+                const alphabet = katakana + latin + nums + symbols;
+                
+                const fontSize = 16;
+                const columns = matrixCanvas.width / fontSize;
+                
+                const rainDrops = [];
+                
+                for (let x = 0; x < columns; x++) {
+                    rainDrops[x] = 1;
+                }
+                
+                const draw = () => {
+                    ctx.fillStyle = 'rgba(0, 10, 0, 0.05)';
+                    ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+                    
+                    ctx.fillStyle = '#00FF41';
+                    ctx.font = fontSize + 'px monospace';
+                    
+                    for (let i = 0; i < rainDrops.length; i++) {
+                        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+                        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
+                        
+                        if (rainDrops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                            rainDrops[i] = 0;
+                        }
+                        rainDrops[i]++;
+                    }
+                };
+                
+                setInterval(draw, 30);
+            }
+            
+            // Resize handler
+            window.addEventListener('resize', function() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                
+                if (matrixCanvas) {
+                    matrixCanvas.width = matrixCanvas.offsetWidth;
+                    matrixCanvas.height = matrixCanvas.offsetHeight;
+                }
+            });
+            
+            // Mensaje motivacional aleatorio
+            const motivationalMessages = [
+                "El único límite es tu imaginación. ¡Sigue codificando!",
+                "Cada error es una oportunidad para aprender algo nuevo.",
+                "El código que escribes hoy es el legado que dejas mañana.",
+                "Los grandes desarrolladores no nacen, se hacen con práctica y pasión.",
+                "El futuro es digital, y tú estás construyéndolo."
+            ];
+            
+            setInterval(() => {
+                const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+                console.log(`%c${randomMessage}`, 'color: #00f7ff; font-size: 14px; font-weight: bold;');
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
